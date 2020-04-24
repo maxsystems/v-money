@@ -5,8 +5,13 @@
   "main": "dist/v-money.common.js",
   "module": "src/index.js",
   "license": "MIT",
-  "author": "Marcos Neves <marcos.neves@gmail.com> (https://vuejs-tips.github.io/)",
+  "author": {
+    "name": "Marcos Neves",
+    "email": "marcos.neves@gmail.com",
+    "url": "https://vuejs-tips.github.io/"
+  },
   "scripts": {
+    "prepare": "npm run build",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name v-money ./src/index.js",
     "test": "vue-cli-service test:unit"
