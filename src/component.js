@@ -1,12 +1,3 @@
-<template lang="html">
-  <input type="tel"
-         :value="formattedValue"
-         @change="change"
-         v-money="{precision, decimal, thousands, prefix, suffix}"
-         class="v-money" />
-</template>
-
-<script>
 import money from './directive'
 import defaults from './options'
 import {format, unformat} from './utils'
@@ -56,7 +47,7 @@ export default {
   watch: {
     value: {
       immediate: true,
-      handler (newValue, oldValue) {
+      handler (newValue) {
         var formatted = format(newValue, this.$props)
         if (formatted !== this.formattedValue) {
           this.formattedValue = formatted
@@ -69,6 +60,32 @@ export default {
     change (evt) {
       this.$emit('input', this.masked ? evt.target.value : unformat(evt.target.value, this.precision))
     }
+  },
+
+  render (h) {
+    return h('input', {
+      directives: [{
+        name: 'v-money',
+        value: {
+          precision: this.precision,
+          decimal: this.decimal,
+          thousands: this.thousands,
+          prefix: this.prefix,
+          suffix: this.suffix
+        }
+      }],
+      attrs: {
+        type: 'tel',
+        ...this.$attrs
+      },
+      class: 'v-money',
+      props: {
+        value: this.formattedValue
+      },
+      on: {
+        ...this.$listeners,
+        change: this.change
+      }
+    })
   }
 }
-</script>
