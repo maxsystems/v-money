@@ -1,4 +1,4 @@
-import assign from '../src/assign'
+import assign from '../../src/assign'
 test ('assign undefined', () => {
   var result = assign(undefined, undefined)
   var expected = {}
